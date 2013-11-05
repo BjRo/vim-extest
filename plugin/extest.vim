@@ -1,8 +1,8 @@
 " Prevent the script from loading multiple times
-if exists("extest_loaded")
-  finish
-endif
-let extest_loaded = 1
+"if exists("extest_loaded")
+  "finish
+"endif
+"let extest_loaded = 1
 
 " Default configuration if not set from another location
 if !exists("extest_exunit_run_file_cmd")
