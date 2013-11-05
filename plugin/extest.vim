@@ -40,6 +40,8 @@ function s:RunLast()
   return s:RunTestCommand(g:extest_last_cmd)
 endfunction
 
+" Starts a test run.
+" @param type ["test" | "file"]
 function s:ExecTestRun(type)
   let l:framework = s:IdentifyFramework()
 
@@ -48,27 +50,30 @@ function s:ExecTestRun(type)
     return
   endif
 
-  return s:RunTestCommand(s:TestCommandFor(l:framework, a:type))
+  return s:RunCommand(s:ShellCommandFor(l:framework, a:type))
 endfunction
 
-function s:TestCommandFor(framework, type)
+" Builds up the shellcommand for the particular test framework
+" and replaces all placeholders with the actual values from the current buffer
+function s:ShellCommandFor(framework, type)
   let l:cmd =  eval("g:extest_" . a:framework . "_run_" . a:type . "_cmd")
   let l:cmd = substitute(l:cmd, '%f', @%, 'g')
   let l:cmd = substitute(l:cmd, '%l', getpos(".")[1], 'g')
   return l:cmd
 endfunction
 
-function s:RunTestCommand(testCommand)
+function s:RunCommand(testCommand)
   let g:extest_last_cmd = a:testCommand
   exe "!echo '" . a:testCommand . "' && " . a:testCommand
 endfunction
 
+" Identifies the testframework used in the current buffer
+" @returns (amrita | exunit | "")
 let s:framework_identifiers = {}
 let s:framework_identifiers['^\s*test\s*"'] = "exunit"
 let s:framework_identifiers['^\s*use ExUnit.Case\s*'] = "exunit"
 let s:framework_identifiers['^\s*\(it\|fact\|facts\|describe\|context\|specify\) \s*'] = "amrita"
 let s:framework_identifiers['^\s*use Amrita.Sweet\s*'] = "amrita"
-
 function s:IdentifyFramework()
   let l:ln = a:firstline
   while ln > 0
