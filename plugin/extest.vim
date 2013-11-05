@@ -43,14 +43,19 @@ function s:ExecTestRun(type)
     return
   endif
 
-  echo s:TestCommandFor(l:framework, a:type)
+  return s:RunTestCommand(s:TestCommandFor(l:framework, a:type))
 endfunction
 
 function s:TestCommandFor(framework, type)
-  let l:cmd =  eval(join(["g:extest_", a:framework, "_run_", a:type, "_cmd"], ""))
+  let l:cmd =  eval("g:extest_" . a:framework . "_run_" . a:type . "_cmd")
   let l:cmd = substitute(l:cmd, '%f', @%, 'g')
   let l:cmd = substitute(l:cmd, '%l', getpos(".")[1], 'g')
-  retur l:cmd
+  return l:cmd
+endfunction
+
+function s:RunTestCommand(testCommand)
+  let g:extest_last_cmd = a:testCommand
+  exe "!echo '" . a:testCommand . "' && " . a:testCommand
 endfunction
 
 let s:framework_identifiers = {}
