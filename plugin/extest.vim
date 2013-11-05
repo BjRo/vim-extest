@@ -39,6 +39,7 @@ function s:ExecTestRun(type)
   let l:framework = s:IdentifyFramework()
 
   if empty(l:framework)
+    echo 'No test case found.'
     return
   endif
 
