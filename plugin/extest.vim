@@ -18,10 +18,10 @@
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 " Prevent the script from loading multiple times
-"if exists("g:extest_loaded") || &cp
-  "finish
-"endif
-"let g:extest_loaded = 1
+if exists("g:extest_loaded") || &cp
+  finish
+endif
+let g:extest_loaded = 1
 
 " Default configuration if not set from another location
 if !exists("g:extest_exunit_run_file_cmd")
