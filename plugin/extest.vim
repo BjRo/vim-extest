@@ -28,7 +28,7 @@ function s:RunFile()
 endfunction
 
 function s:RunTest()
-  echo "RunTest called."
+  return s:ExecTestRun("test")
 endfunction
 
 function s:RunLast()
