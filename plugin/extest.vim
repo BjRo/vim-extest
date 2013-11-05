@@ -17,3 +17,19 @@ endif
 if !exists("extest_amrita_run_test_cmd")
   let s:extest_amrita_run_test_cmd = "mix amrita '%f:%l'"
 endif
+
+command ExTestRunFile call <SID>RunFile()
+command ExTestRunTest call <SID>RunTest()
+command ExTestRunLast call <SID>RunLast()
+
+function s:RunFile()
+  echo "RunFile called."
+endfunction
+
+function s:RunTest()
+  echo "RunTest called."
+endfunction
+
+function s:RunLast()
+  echo "RunLast called."
+endfunction
