@@ -1,21 +1,21 @@
 " Prevent the script from loading multiple times
-"if exists("extest_loaded")
+"if exists("g:extest_loaded") || &cp
   "finish
 "endif
-"let extest_loaded = 1
+"let g:extest_loaded = 1
 
 " Default configuration if not set from another location
-if !exists("extest_exunit_run_file_cmd")
-  let s:extest_exunit_run_file_cmd = "mix test '%f'"
+if !exists("g:extest_exunit_run_file_cmd")
+  let g:extest_exunit_run_file_cmd = "mix test '%f'"
 endif
-if !exists("extest_exunit_run_test_cmd")
-  let s:extest_exunit_run_test_cmd = "mix test '%f'"
+if !exists("g:extest_exunit_run_test_cmd")
+  let g:extest_exunit_run_test_cmd = "mix test '%f'"
 endif
-if !exists("extest_amrita_run_file_cmd")
-  let s:extest_amrita_run_file_cmd = "mix amrita '%f'"
+if !exists("g:extest_amrita_run_file_cmd")
+  let g:extest_amrita_run_file_cmd = "mix amrita '%f'"
 endif
-if !exists("extest_amrita_run_test_cmd")
-  let s:extest_amrita_run_test_cmd = "mix amrita '%f:%l'"
+if !exists("g:extest_amrita_run_test_cmd")
+  let g:extest_amrita_run_test_cmd = "mix amrita '%f:%l'"
 endif
 
 " Exported commands
@@ -24,8 +24,7 @@ command ExTestRunTest call <SID>RunTest()
 command ExTestRunLast call <SID>RunLast()
 
 function s:RunFile()
-  echo "RunFile called."
-  echo s:IdentifyFramework()
+  return s:ExecTestRun("file")
 endfunction
 
 function s:RunTest()
@@ -34,6 +33,20 @@ endfunction
 
 function s:RunLast()
   echo "RunLast called."
+endfunction
+
+function s:ExecTestRun(type)
+  let l:framework = s:IdentifyFramework()
+
+  if empty(l:framework)
+    return
+  endif
+
+  echo s:TestCommandFor(l:framework, a:type)
+endfunction
+
+function s:TestCommandFor(framework, type)
+  return eval(join(["g:extest_", a:framework, "_run_", a:type, "_cmd"], ""))
 endfunction
 
 let s:framework_identifiers = {}
@@ -53,5 +66,5 @@ function s:IdentifyFramework()
     endfor
     let l:ln -= 1
   endwhile
-  return 0
+  return ""
 endfunction
