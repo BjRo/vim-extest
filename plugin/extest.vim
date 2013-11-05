@@ -32,7 +32,12 @@ function s:RunTest()
 endfunction
 
 function s:RunLast()
-  echo "RunLast called."
+  if !exists("g:extest_last_cmd")
+    echo "No previous test has been run"
+    return
+  endif
+
+  return s:RunTestCommand(g:extest_last_cmd)
 endfunction
 
 function s:ExecTestRun(type)
