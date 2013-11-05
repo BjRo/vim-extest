@@ -46,7 +46,8 @@ function s:ExecTestRun(type)
 endfunction
 
 function s:TestCommandFor(framework, type)
-  return eval(join(["g:extest_", a:framework, "_run_", a:type, "_cmd"], ""))
+  let l:base =  eval(join(["g:extest_", a:framework, "_run_", a:type, "_cmd"], ""))
+  return substitute(l:base, '%f', @%, 'g')
 endfunction
 
 let s:framework_identifiers = {}
