@@ -56,7 +56,7 @@ function s:RunLast()
     return
   endif
 
-  return s:RunTestCommand(g:extest_last_cmd)
+  return s:RunCommand(g:extest_last_cmd)
 endfunction
 
 " Starts a test run.
