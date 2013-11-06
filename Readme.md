@@ -11,7 +11,7 @@ then simply copy and paste:
 
 ```console
 cd ~/.vim/bundle
-git clone git://github.com/bjro/vim-extest.git
+git clone git://github.com/BjRo/vim-extest.git
 ```
 
 ## Key Bindings
