@@ -25,7 +25,7 @@ If you want to bind those commands to your leader keys, you can do so neverthele
 
 ```vim
 map <leader>T :ExTestRunFile<CR>
-map <leader>t :ExTestRunMethod<CR>
+map <leader>t :ExTestRunTest<CR>
 map <leader>lt :ExTestRunLast<CR>
 ```
 
