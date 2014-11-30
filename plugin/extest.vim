@@ -28,7 +28,7 @@ if !exists("g:extest_exunit_run_file_cmd")
   let g:extest_exunit_run_file_cmd = "mix test '%f'"
 endif
 if !exists("g:extest_exunit_run_test_cmd")
-  let g:extest_exunit_run_test_cmd = "mix test '%f'"
+  let g:extest_exunit_run_test_cmd = "mix test '%f:%l'"
 endif
 if !exists("g:extest_amrita_run_file_cmd")
   let g:extest_amrita_run_file_cmd = "mix amrita '%f'"
