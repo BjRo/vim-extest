@@ -59,6 +59,17 @@ function s:RunLast()
   return s:RunCommand(g:extest_last_cmd)
 endfunction
 
+function s:RunTestOrLast()
+  let l:framework = s:IdentifyFramework()
+
+  if empty(l:framework)
+    return s:RunLast()
+  else
+    return s:RunTest()
+  endif
+endfunction
+
+
 " Starts a test run.
 " @param type ["test" | "file"]
 function s:ExecTestRun(type)
