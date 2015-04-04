@@ -91,6 +91,7 @@ endfunction
 let s:framework_identifiers = {}
 let s:framework_identifiers['^\s*test\s*"'] = "exunit"
 let s:framework_identifiers['^\s*use ExUnit.Case\s*'] = "exunit"
+let s:framework_identifiers['^\s*\(should\|with\) \s*"'] = "exunit"
 let s:framework_identifiers['^\s*\(it\|fact\|facts\|describe\|context\|specify\) \s*'] = "amrita"
 let s:framework_identifiers['^\s*use Amrita.Sweet\s*'] = "amrita"
 function s:IdentifyFramework()
