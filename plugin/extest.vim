@@ -28,7 +28,7 @@ if !exists("g:extest_exunit_run_file_cmd")
   let g:extest_exunit_run_file_cmd = "mix test '%f'"
 endif
 if !exists("g:extest_exunit_run_test_cmd")
-  let g:extest_exunit_run_test_cmd = "mix test '%f'"
+  let g:extest_exunit_run_test_cmd = "mix test '%f:%l'"
 endif
 if !exists("g:extest_amrita_run_file_cmd")
   let g:extest_amrita_run_file_cmd = "mix amrita '%f'"
@@ -91,6 +91,7 @@ endfunction
 let s:framework_identifiers = {}
 let s:framework_identifiers['^\s*test\s*"'] = "exunit"
 let s:framework_identifiers['^\s*use ExUnit.Case\s*'] = "exunit"
+let s:framework_identifiers['^\s*\(should\|with\) \s*"'] = "exunit"
 let s:framework_identifiers['^\s*\(it\|fact\|facts\|describe\|context\|specify\) \s*'] = "amrita"
 let s:framework_identifiers['^\s*use Amrita.Sweet\s*'] = "amrita"
 function s:IdentifyFramework()
