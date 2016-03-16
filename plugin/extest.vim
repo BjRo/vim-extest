@@ -41,6 +41,7 @@ endif
 command ExTestRunFile call <SID>RunFile()
 command ExTestRunTest call <SID>RunTest()
 command ExTestRunLast call <SID>RunLast()
+command ExTestRunCurrentOrLast call <SID>RunCurrentOrLast()
 
 function s:RunFile()
   return s:ExecTestRun("file")
@@ -58,6 +59,17 @@ function s:RunLast()
 
   return s:RunCommand(g:extest_last_cmd)
 endfunction
+
+function s:RunCurrentOrLast()
+  let l:framework = s:IdentifyFramework()
+
+  if empty(l:framework)
+    return s:RunLast()
+  else
+    return s:RunTest()
+  endif
+endfunction
+
 
 " Starts a test run.
 " @param type ["test" | "file"]
