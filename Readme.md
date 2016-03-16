@@ -1,3 +1,6 @@
+# !!! Deprecated !!!
+This plugin is deprecated. [vim-test](https://github.com/janko-m/vim-test) offers much more (and is what I personally use nowadays).
+
 # extest.vim
 
 `extest.vim` is a [vim](http://www.vim.org) plugin, which helps you to run tests written in the [elixir](http://elixir-lang.org/) language from inside vim.
